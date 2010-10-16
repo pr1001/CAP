@@ -1,0 +1,6 @@
+[submodule "BFCollections"]
+	path = BFCollections
+	url = git://github.com/pr1001/BFCollections.git
+[submodule "super_closure"]
+	path = super_closure
+	url = http://github.com/jeremeamia/super_closure.git
