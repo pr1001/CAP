@@ -1,18 +1,20 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+require_once('cap.php');
+require_once('form.php');
 
-require 'cap.php';
-
-$a = function($num) {
-    $t = $num * $num;
-    return "$num squared is $t!";
-};
-$id = CAP::register($a);
-echo '<form action="cap.php" method="POST">';
-echo '<input type="text" name="' . $id . '" />';
-echo '<input type="submit" />';
-echo '</form>';
+$form = new Form('cap_test.php', function() {
+    print '<p>Called first</p>';
+});
+$x_id = $form->text('x', function($x) {
+    return $x * $x;
+});
+$y_id = $form->text('y', function($y) {
+    return $y * $y;
+});
+$form->submit('Submit that mutha!', function() use ($x_id, $y_id) {
+    printf("<p>x squared is %d, y squared is %d.", CAP::$results[$x_id], CAP::$results[$y_id]);
+});
+echo $form->toHTML();
 
 ?>
